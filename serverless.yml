@@ -1,0 +1,23 @@
+service: posts
+
+provider:
+  name: aws
+  runtime: python3.8
+  memorySize: 128
+
+package:
+  exclude:
+    - test.py
+
+functions:  
+  getNegocios:
+    handler: handler.get_negocios
+    events:
+      - http:
+          path: negocios/{condicion}/{entidad}
+          method: get
+
+plugins:
+  - serverless-python-requirements
+  - serverless-dotenv-plugin
+  - serverless-offline
